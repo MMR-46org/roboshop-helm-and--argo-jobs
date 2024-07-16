@@ -1,5 +1,5 @@
-{{- with .Values.job }}
-{{- if .enabled }}
+{{- with .Values.job -}}
+{{- if .enabled -}}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -36,5 +36,5 @@ spec:
             - mountPath: /parameters
               name: parameters
 
-{{- end }}
-{{- end }}
+{{- end -}}
+{{- end -}}
