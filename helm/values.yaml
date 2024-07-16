@@ -1,6 +1,2 @@
-service:
-  port: 80
-  containerPort: 8080
-
 job:
   enabled: false
