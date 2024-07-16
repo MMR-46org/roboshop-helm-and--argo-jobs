@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.component }}-schema-load
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ .Values.component }}
+      volumes:
+        - name: parameters
+          emptyDir: { }
+      initContainers:
+        - name: parameters-pull
+          image: 512646826903.dkr.ecr.us-east-1.amazonaws.com/parameter-store-init-container-image:v1.0.6
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /parameters
+              name: parameters
+          env:
+            - name: PARAMS
+              value: {{ .Values.job.PARAMS }}
+      containers:
+        - name: schema-load
+          image: 512646826903.dkr.ecr.us-east-1.amazonaws.com/schema-loader:v1.0.6
+          imagePullPolicy: Always
+          env:
+            - name: COMPONENT
+              value: {{ .Values.component }}
+            - name: SCHEMA_TYPE
+              value: {{ .Values.schema_type }}
+          volumeMounts:
+            - mountPath: /parameters
+              name: parameters
+      restartPolicy: Never
+  backoffLimit: 4

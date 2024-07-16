@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.component }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.component }}-{{ .Values.env }}.madhanmohanreddy.tech
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .Values.component }}-dev.madhanmohanreddy.tech
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.component }}
+                port:
+                  number: 80
+            path: /
