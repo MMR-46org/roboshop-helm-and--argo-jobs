@@ -8,7 +8,7 @@ spec:
   backoffLimit: 4
   template:
     spec:
-      serviceAccountName: "{{ .Values.component }}"
+      serviceAccountName: "{{ $.Values.component }}"
       restartPolicy: Never
       volumes:
         - name: parameters
@@ -29,7 +29,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: COMPONENT
-              value: "{{ .Values.component }}"
+              value: "{{ $.Values.component }}"
             - name: SCHEMA_TYPE
               value: "{{ .Values.schema_type }}"
           volumeMounts:
