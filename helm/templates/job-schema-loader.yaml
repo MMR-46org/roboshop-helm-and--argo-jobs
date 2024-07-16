@@ -22,7 +22,7 @@ spec:
               name: parameters
           env:
             - name: PARAMS
-              value: "{{ .Values.job.PARAMS }}"
+              value: "{{ $.Values.job.PARAMS }}"
       containers:
         - name: schema-load
           image: 512646826903.dkr.ecr.us-east-1.amazonaws.com/schema-loader:v1.0.6
@@ -31,7 +31,7 @@ spec:
             - name: COMPONENT
               value: "{{ $.Values.component }}"
             - name: SCHEMA_TYPE
-              value: "{{ .Values.schema_type }}"
+              value: "{{ $.Values.schema_type }}"
           volumeMounts:
             - mountPath: /parameters
               name: parameters
