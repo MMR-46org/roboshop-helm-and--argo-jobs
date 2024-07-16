@@ -1,8 +1,10 @@
+{{- if .Values.job.enabled -}}
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Values.component }}-schema-load
 spec:
+  backoffLimit: 4
   template:
     spec:
       serviceAccountName: {{ .Values.component }}
@@ -32,4 +34,4 @@ spec:
             - mountPath: /parameters
               name: parameters
       restartPolicy: Never
-  backoffLimit: 4
+{{- end -}}
