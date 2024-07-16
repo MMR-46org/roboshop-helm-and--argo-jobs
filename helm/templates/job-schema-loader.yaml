@@ -1,4 +1,3 @@
-{{- if .Values.job.enabled -}};do
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -7,7 +6,8 @@ spec:
   backoffLimit: 4
   template:
     spec:
-      serviceAccountName: {{ .Values.component }}
+      serviceAccountName: "{{ .Values.component }}"
+      restartPolicy: Never
       volumes:
         - name: parameters
           emptyDir: { }
@@ -20,18 +20,16 @@ spec:
               name: parameters
           env:
             - name: PARAMS
-              value: {{ .Values.job.PARAMS }}
+              value: "{{ .Values.job.PARAMS }}"
       containers:
         - name: schema-load
           image: 512646826903.dkr.ecr.us-east-1.amazonaws.com/schema-loader:v1.0.6
           imagePullPolicy: Always
           env:
             - name: COMPONENT
-              value: {{ .Values.component }}
+              value: "{{ .Values.component }}"
             - name: SCHEMA_TYPE
-              value: {{ .Values.schema_type }}
+              value: "{{ .Values.schema_type }}"
           volumeMounts:
             - mountPath: /parameters
               name: parameters
-      restartPolicy: Never
-{{- end -}}
