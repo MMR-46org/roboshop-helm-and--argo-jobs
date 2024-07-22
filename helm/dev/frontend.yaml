@@ -2,6 +2,8 @@ env: dev
 replica: 1
 
 component: frontend
+ingress:
+  enabled: true
 service:
   port: 80
   containerPort: 80
