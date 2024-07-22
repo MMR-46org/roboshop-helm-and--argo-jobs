@@ -1,0 +1,8 @@
+env: prod
+replica: 2
+PARAMS: "prod.roboshop.user.MONGO_URL,MONGO_URL  prod.roboshop.user.REDIS_HOST,REDIS_HOST"
+
+component: user
+service:
+  port: 80
+  containerPort: 8080

@@ -1,0 +1,7 @@
+env: prod
+replica: 2
+
+component: frontend
+service:
+  port: 80
+  containerPort: 80

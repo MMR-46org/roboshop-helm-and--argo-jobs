@@ -1,0 +1,8 @@
+env: prod
+replica: 2
+PARAMS: "prod.roboshop.payment.CART_HOST,CART_HOST prod.roboshop.payment.CART_PORT,CART_PORT prod.roboshop.payment.USER_HOST,USER_HOST prod.roboshop.payment.USER_PORT,USER_PORT prod.roboshop.payment.AMQP_HOST,AMQP_HOST prod.roboshop.payment.AMQP_USER,AMQP_USER prod.roboshop.payment.AMQP_PASS,AMQP_PASS"
+
+component: payment
+service:
+  port: 80
+  containerPort: 8080
