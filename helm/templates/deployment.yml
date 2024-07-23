@@ -27,7 +27,7 @@ spec:
               value: {{ .Values.PARAMS }}
       containers:
         - name: {{ .Values.component }}
-          image: 512646826903.dkr.ecr.us-east-1.amazonaws.com/cart:v1.0.5
+          image: 512646826903.dkr.ecr.us-east-1.amazonaws.com/{{ .Values.component }}:v1.0.5
           imagePullPolicy: Always
           resources:
             requests:
