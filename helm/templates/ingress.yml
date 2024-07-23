@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: {{ $.Values.component }}-dev.madhanmohanreddy.tech
+    - host: {{ $.Values.component }}-{{ $.Values.env }}.madhanmohanreddy.tech
       http:
         paths:
           - pathType: Prefix
