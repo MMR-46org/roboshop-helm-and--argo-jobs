@@ -4,6 +4,4 @@ job:
 ingress:
   enabled: false
 
-resources:
-  enabled: false
 
