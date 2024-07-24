@@ -13,3 +13,10 @@ job:
   PARAMS: "prod.roboshop.rds.endpoint,DB_HOST prod.roboshop.rds.username,DB_USER prod.roboshop.rds.password,DB_PASS"
 
 
+resources:
+  requests:
+    memory: "2Gi"
+    cpu: "1000m"
+  limits:
+    memory: "2.5Gi"
+    cpu: "1500m"
