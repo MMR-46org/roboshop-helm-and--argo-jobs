@@ -11,3 +11,12 @@ service:
 job:
   enabled: true
   PARAMS: "prod.roboshop.docdb.username,DOCDB_USER prod.roboshop.docdb.password,DOCDB_PASS prod.roboshop.docdb.endpoint,DOCDB_ENDPOINT"
+
+
+resources:
+  requests:
+    memory: "100Mi"
+    cpu: "100m"
+  limits:
+    memory: "150Mi"
+    cpu: "100m"

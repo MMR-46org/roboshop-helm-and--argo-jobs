@@ -1,22 +1,20 @@
-{{- with .Values.resources }}
-{{- if .enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $.Values.component }}
+  name: {{ .Values.component }}
   labels:
-    app: {{ $.Values.component }}
+    app: {{ .Values.component }}
 spec:
-  replicas: {{ $.Values.replica }}
+  replicas: {{ .Values.replica }}
   selector:
     matchLabels:
-      app: {{ $.Values.component }}
+      app: {{ .Values.component }}
   template:
     metadata:
       labels:
-        app: {{ $.Values.component }}
+        app: {{ .Values.component }}
     spec:
-      serviceAccountName: {{ $.Values.component }}
+      serviceAccountName: {{ .Values.component }}
       initContainers:
         - name: parameters-pull
           image: 512646826903.dkr.ecr.us-east-1.amazonaws.com/parameter-store-init-container-image:v1.0.6
@@ -26,23 +24,16 @@ spec:
               name: parameters
           env:
             - name: PARAMS
-              value: {{ $.Values.PARAMS }}
+              value: {{ .Values.PARAMS }}
       containers:
-        - name: {{ $.Values.component }}
-          image: 512646826903.dkr.ecr.us-east-1.amazonaws.com/{{ $.Values.component }}:v1.0.5
+        - name: {{ .Values.component }}
+          image: 512646826903.dkr.ecr.us-east-1.amazonaws.com/{{ .Values.component }}:v1.0.5
           imagePullPolicy: Always
           resources:
-            requests:
-              memory: {{ $.Values.resources.requests.memory  }}
-              cpu: {{ $.Values.resources.requests.cpu  }}
-            limits:
-              memory: {{ $.Values.resources.limits.memory  }}
-              cpu: {{ $.Values.resources.limits.cpu  }}
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - mountPath: /parameters
               name: parameters
       volumes:
         - name: parameters
           emptyDir: { }
-{{- end }}
-{{- end }}
