@@ -6,7 +6,6 @@ metadata:
   name: {{ $.Values.component }}
   annotations:
     external-dns.alpha.kubernetes.io/hostname: {{ $.Values.component }}-{{ $.Values.env }}.madhanmohanreddy.tech
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   rules:
