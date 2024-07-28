@@ -37,7 +37,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /health
-              port: 8080
+              port: {{ .Values.service.containerPort }}
             failureThreshold: 10
             periodSeconds: 10
       volumes:
